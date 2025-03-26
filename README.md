@@ -8,11 +8,10 @@
 (Tire uma captura de tela do seu projeto e coloque aqui para mostrar como ele fica)
 
 ## ⚙️ **Funcionalidades**  
-- **Monitoramento em Tempo Real**: Exibe uma lista de processos em tempo real com informações detalhadas.
-- **Uso de Memória e CPU**: Visualize rapidamente quanto de memória e CPU cada processo está consumindo.
-- **Detalhes dos Processos**: Exibe informações sobre o PID, estado, usuário, e muito mais.
-- **Filtragem de Processos**: Filtre os processos por nome, uso de CPU, ou outros critérios.
-- **Interface Intuitiva**: Interface simples e de fácil navegação para usuários de todos os níveis.
+- **Gráfico de Utilização de Memória**: Exibe um gráfico em tempo real mostrando o uso de memória pelo sistema e processos em execução.
+- **Gráfico de Utilização de CPU**: Exibe um gráfico em tempo real mostrando o uso da CPU pelo sistema e processos em execução.
+- **Finalizar Processos**: Permite que o usuário finalize processos em execução diretamente pela interface da aplicação.
+- **Gerenciamento de Permissões**: Permite configurar permissões para usuários e grupos em arquivos e pastas, facilitando a administração de permissões no sistema.
 
 ## 💻 **Tecnologias Usadas**  
 - **Frontend**: HTML, CSS, JavaScript (com charts.js)
