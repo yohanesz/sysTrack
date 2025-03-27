@@ -1,0 +1,27 @@
+{
+  "type":"module",
+  "name": "systrack",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yohanesz/sysTrack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yohanesz/sysTrack/issues"
+  },
+  "homepage": "https://github.com/yohanesz/sysTrack#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "ls-list": "^0.13.6",
+    "ps-list": "^8.1.1"
+  }
+}
