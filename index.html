@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Processos</title>
+    <script defer src="/src/processMonitor.js"></script>
+    <link href="src/output.css" rel="stylesheet">
+    <!-- <script defer src="/charts.js" type="module"></script> -->
+     <script defer src="src/processOS.js" type="module"></script>
+
+</head>
+<body class="bg-gray-900 text-gray-800">
+
+    <div class="flex flex-row-reverse min-h-screen min-w-screen">
+        
+       
+        <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden">
+                
+        </div>
+     
+      <div>
+
+            
+      <div class="flex max-h-full justify-between p-20 gap-40">
+                
+<div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
+    <div class="flex justify-between">
+      <div>
+        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">RAM</h5>
+        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso de RAM (GB)</p>
+      </div>
+      <div
+        class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
+        12%
+        <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
+        </svg>
+      </div>
+    </div>
+    <div id="area-chart"></div>
+  </div>
+
+  <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
+    <div class="flex justify-between">
+      <div>
+        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">CPU</h5>
+        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso da CPU</p>
+      </div>
+      <div
+        class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
+        12%
+        <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
+        </svg>
+      </div>
+    </div>
+    <div id="area-chart2"></div>
+  </div>
+ 
+
+
+            </div>
+            <div>
+                <form action="#"></form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<script>
+    async function fetchProcesses() {
+        const response = await fetch('http://localhost:5000/api');  // Alterado para a nova rota da API
+            const data = await response.json();
+    
+            const processList = document.getElementById('processList');
+            processList.innerHTML = ''; // Limpa a lista atual
+
+            // Adiciona os processos à tela
+            data.forEach(process => {
+                const processItem = document.createElement('div');
+                processItem.classList.add('shadow-md', 'w-200', 'rounded-lg', 'p-4', 'h-35','dark:bg-gray-800');
+                processItem.innerHTML = `
+                  <div class="flex justify-between items-end">
+                    <div>
+                        <p class="font-bold text-gray-900 dark:text-white">PID: ${process.pid}</p>
+                        <p class="font-normal text-gray-500 dark:text-gray-400">Nome: ${process.name}</p>
+                        <p class="font-normal text-gray-500 dark:text-gray-400">CPU: ${process.cpu}%</p>
+                        <p class="font-normal text-gray-500 dark:text-gray-400">Memória: ${process.memory} KB</p>
+                    </div>
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer">Encerrar</button>
+                </div>
+
+                `;
+                processList.appendChild(processItem);
+            });
+        }
+    
+        // Atualiza a lista a cada segundo
+        setInterval(fetchProcesses, 5000);
+        fetchProcesses();  // Chama a função imediatamente para exibir os processos
+    </script>
+    
+    
+
+</body>
+</html>

@@ -1,23 +1,14 @@
 import psList from 'ps-list';
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import cors from 'cors';
+import os from 'os';
+import os from 'os-utils';
+
 
 const app = express();
-const port = 4000;
+const port = 5000;
+app.use(cors());
 
-// Usando import.meta.url para definir o diretório atual
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Servir arquivos estáticos da pasta 'public'
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
-
-// Função para pegar os processos
 async function getProcesses() {
     try {
         const processes = await psList();
@@ -33,12 +24,36 @@ async function getProcesses() {
     }
 }
 
-// Rota para obter os processos
-app.get('/api/processes', async (req, res) => {
+app.get('/api', async (req, res) => {
     try {
         const processes = await getProcesses();
-        res.json(processes); // Envia os processos como JSON
+        res.json(processes);
     } catch (error) {
-        res.status(5000).json({ error: "Erro ao obter processos", details: error.message });
+        res.status(500).json({ error: "Erro ao obter processos", details: error.message });
     }
+});
+
+
+app.get('/api/system-info', (req, res) => {
+    const totalMem = os.totalmem(); // Memória total em bytes
+    const freeMem = os.freemem();   // Memória livre em bytes
+    const usedMem = totalMem - freeMem; // Memória usada em bytes
+
+    // Usar os-utils para pegar o uso da CPU
+    os.cpuUsage(function(cpuUsage) {
+        res.json({
+            totalMemGB: (totalMem / (1024 ** 3)).toFixed(2), // Total de memória em GB
+            freeMemGB: (freeMem / (1024 ** 3)).toFixed(2),   // Memória livre em GB
+            usedMemGB: (usedMem / (1024 ** 3)).toFixed(2),   // Memória usada em GB
+            ramUsagePercent: ((usedMem / totalMem) * 100).toFixed(2), // Percentual de memória usada
+            cpuUsagePercent: (cpuUsage * 100).toFixed(2), // Percentual de uso da CPU
+        });
+    });
+});
+
+
+
+
+app.listen(port, () => {
+    console.log(`API rodando em http://localhost:${port}`);
 });

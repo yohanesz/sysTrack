@@ -1,27 +1,25 @@
 {
-  "type":"module",
   "name": "systrack",
-  "version": "1.0.0",
-  "main": "app.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yohanesz/sysTrack.git"
+  "devDependencies": {
+    "vite": "^6.2.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yohanesz/sysTrack/issues"
-  },
-  "homepage": "https://github.com/yohanesz/sysTrack#readme",
-  "description": "",
   "dependencies": {
+    "@tailwindcss/cli": "^4.0.17",
+    "@tailwindcss/vite": "^4.0.17",
+    "apexcharts": "^3.46.0",
+    "chart.js": "^4.4.8",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
-    "ls-list": "^0.13.6",
-    "ps-list": "^8.1.1"
+    "ps-list": "^8.1.1",
+    "tailwindcss": "^4.0.17"
   }
 }
