@@ -2,7 +2,7 @@ import psList from 'ps-list';
 import express from 'express';
 import cors from 'cors';
 import os from 'os';
-import os from 'os-utils';
+import oss from 'os-utils';
 
 
 const app = express();
@@ -33,14 +33,13 @@ app.get('/api', async (req, res) => {
     }
 });
 
-
 app.get('/api/system-info', (req, res) => {
     const totalMem = os.totalmem(); // Memória total em bytes
     const freeMem = os.freemem();   // Memória livre em bytes
     const usedMem = totalMem - freeMem; // Memória usada em bytes
 
     // Usar os-utils para pegar o uso da CPU
-    os.cpuUsage(function(cpuUsage) {
+    oss.cpuUsage(function(cpuUsage) {
         res.json({
             totalMemGB: (totalMem / (1024 ** 3)).toFixed(2), // Total de memória em GB
             freeMemGB: (freeMem / (1024 ** 3)).toFixed(2),   // Memória livre em GB
@@ -50,6 +49,7 @@ app.get('/api/system-info', (req, res) => {
         });
     });
 });
+
 
 
 
