@@ -1,6 +1,7 @@
+import {exec} from 'child_process';
 
 async function fetchProcesses() {
-    const response = await fetch('http://localhost:5000/api');  // Alterado para a nova rota da API
+        const response = await fetch('http://localhost:5000/api');  // Alterado para a nova rota da API
         const data = await response.json();
 
         const processList = document.getElementById('processList');
@@ -24,7 +25,24 @@ async function fetchProcesses() {
             `;
             processList.appendChild(processItem);
         });
-    }
+}
+
+function encerrarProcesso(pid) {
+    const comando = `kill -SIGTERM ${pid}`;
+
+    exec(comando, (erro, stdout, stderr) => {
+        if (erro) {
+            console.error(`Erro ao encerrar o processo ${pid}: ${erro.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`Processo ${pid} encerrado com sucesso.`);
+    });
+}
+
 
     
 setInterval(fetchProcesses, 5000);

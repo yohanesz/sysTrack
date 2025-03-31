@@ -19,8 +19,8 @@ async function fetchProcess() {
     if (ramData.length > 10) ramData.shift();
     if (cpuData.length > 10) cpuData.shift();
 
-    infoRam.innerText = `${ramData[ramData.length - 1].toString()}Gb`
-    infoCpu.innerText = ramData[ramData.length - 1].toString();
+    infoRam.innerText = `${ramData[ramData.length - 1].toString()} GB`
+    infoCpu.innerText = `${cpuData[cpuData.length - 1].toString()} %`
 
     // Atualiza os gráficos com os novos dados
     updateCharts();
