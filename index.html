@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitor de Processos</title>
-    <script defer src="/src/processMonitor.js" type="module"></script>
+    <script defer src="src/processMonitor.js" type="module"></script>
     <link href="src/output.css" rel="stylesheet">
     <!-- <script defer src="/charts.js" type="module"></script> -->
      <script defer src="src/processOS.js" type="module"></script>
@@ -22,7 +22,7 @@
       <div>
 
             
-      <div class="flex max-h-full justify-between gap-5 max-w-screen" style="padding: calc(0.25rem * 20) 0 calc(0.25rem * 20) 0">
+  <div class="flex max-h-full justify-between gap-5 max-w-screen" style="padding: calc(0.25rem * 20) 0 calc(0.25rem * 20) 0">
                 
 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
     <div class="flex justify-between">
@@ -60,59 +60,22 @@
  
 
 
-            </div>
+  </div>
             <div class="max-w-screen w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
                 <form action="#" class="text-white max-w-sm mx-auto" >
-                  <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your country</label>
+                  <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your country</label>
                   <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 
                     <option>United States</option>
                     <option>Canada</option>
                     <option>France</option>
-                    <option>Germany</option>
+                    <option>Germany</option> -->
                   </select>
                 </form>
             </div>
 
         </div>
     </div>
-
-
-
-<script>
-    async function fetchProcesses() {
-        const response = await fetch('http://localhost:5000/api');  // Alterado para a nova rota da API
-            const data = await response.json();
-    
-            const processList = document.getElementById('processList');
-            processList.innerHTML = ''; // Limpa a lista atual
-
-            // Adiciona os processos à tela
-            data.forEach(process => {
-                const processItem = document.createElement('div');
-                processItem.classList.add('shadow-md', 'w-200', 'rounded-lg', 'p-4', 'h-35','dark:bg-gray-800');
-                processItem.innerHTML = `
-                  <div class="flex justify-between items-end">
-                    <div>
-                        <p class="font-bold text-gray-900 dark:text-white">PID: ${process.pid}</p>
-                        <p class="font-normal text-gray-500 dark:text-gray-400">Nome: ${process.name}</p>
-                        <p class="font-normal text-gray-500 dark:text-gray-400">CPU: ${process.cpu}%</p>
-                        <p class="font-normal text-gray-500 dark:text-gray-400">Memória: ${process.memory} KB</p>
-                    </div>
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer" onclick="encerrarProcesso(${process.pid})">Encerrar</button>
-                </div>
-
-                `;
-                processList.appendChild(processItem);
-            });
-        }
-    
-        // Atualiza a lista a cada segundo
-        setInterval(fetchProcesses, 5000);
-        fetchProcesses();  // Chama a função imediatamente para exibir os processos
-    </script>
-    
-    
 
 </body>
 </html>

@@ -3,16 +3,23 @@ import express from 'express';
 import cors from 'cors';
 import os from 'os';
 import oss from 'os-utils';
+import { exec } from 'child_process';
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const app = express();
 const port = 5000;
 app.use(cors());
 
+
 async function getProcesses() {
     try {
         const processes = await psList();
-        return processes.map(proc => ({
+        // Filtra processos que não possuem um terminal (não são processos em segundo plano)
+        const filteredProcesses = processes.filter(proc => proc.memory > 0 || proc.cpu > 0);
+        
+        return filteredProcesses.map(proc => ({
             pid: proc.pid,
             name: proc.name,
             cpu: proc.cpu,
@@ -23,6 +30,8 @@ async function getProcesses() {
         return [];
     }
 }
+
+
 
 app.get('/api', async (req, res) => {
     try {
@@ -50,10 +59,30 @@ app.get('/api/system-info', (req, res) => {
     });
 });
 
+app.post('/api/kill/:pid', (req, res) => {
+    const pid = req.params.pid;
+    // const senha = process.env.USER_PASSWORD;
+
+    if (!pid) {
+        return res.status(400).json({ error: 'PID não fornecido' });
+    }
+
+    exec(`kill ${pid}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(error.message);
+            return res.status(500).json({ error: error.message });
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return res.status(500).json({ error: stderr });
+        }
+
+        console.log(`Processo ${pid} encerrado com sucesso.`);
+        res.json({ message: `Processo ${pid} encerrado com sucesso.` });
+    });
+});
 
 
-
-
-app.listen(port, () => {
-    console.log(`API rodando em http://localhost:${port}`);
+app.listen(process.env.PORTA, () => {
+    console.log(`API rodando em http://localhost:${process.env.PORTA}`);
 });
