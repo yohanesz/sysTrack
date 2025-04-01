@@ -6,6 +6,7 @@ import oss from 'os-utils';
 import { exec } from 'child_process';
 import dotenv from "dotenv";
 import { group } from 'console';
+import { stderr } from 'process';
 
 dotenv.config();
 
@@ -81,31 +82,27 @@ app.post('/api/kill/:pid', (req, res) => {
     });
 });
 
-app.get("/api/getUsers", (req, res) => {
-    exec("cut -d: -f1 /etc/passwd", (error, output) => {
+app.post('/api/chmod/:user/:group/:dir', (req, res) => {
+    const user = req.params.user;
+    const group = req.params.group;
+    const dir = req.params.dir;
+    const comando = `chmod u=${user},g=${group} ${process.env.HOME}/${dir}`;
 
+    exec(comando, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Erro: ${error.message}`);
+            console.error(`ERRO: ${error.message}`);
             return res.json({ error: error.message });
         }
-   
-        const users = output.split("\n");
-        res.json({ users });
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return res.json({ error: stderr });
+        }
+
+        console.log(`Comando [${comando}] executado com sucesso.`);
+        res.json({ message: `Comando [${comando}] executado com sucesso.` });
     });
 });
 
-app.get("/api/getGroups", (req, res) => {
-
-    exec(`cut -d: -f1 /etc/group`, (error, output) => {
-        if(error) {
-            console.error(`Erro: ${error.message}`);
-            return res.json({error:error.message});
-        }
-
-        const groups = output.split("\n");
-        res.json({ groups });
-    })
-})
 
 
 

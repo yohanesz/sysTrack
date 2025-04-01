@@ -1,3 +1,5 @@
+import { modal } from './modal.js'
+
 async function encerrarProcesso(pid) {
 
     try {
@@ -9,15 +11,16 @@ async function encerrarProcesso(pid) {
             throw new Error(`Erro ao encerrar processo ${pid}`);
         }
 
-        console.log(`Processo ${pid} encerrado com sucesso.`);
+        modal(`Processo ${pid} encerrado com sucesso.`, 1);
+
         fetchProcesses(); 
     } catch (error) {
-        console.error(error);
+        modal(error.message, 2);
     }
 }
 
 async function fetchProcesses() {
-    const response = await fetch('http://localhost:5000/api');  // Alterado para a nova rota da API
+    const response = await fetch('http://localhost:5000/api');  
     const data = await response.json();
 
     const processList = document.getElementById('processList');

@@ -10,9 +10,11 @@
     "start": "node app.js"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "@preline/remove-element": "^3.0.0",
     "@tailwindcss/cli": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
     "apexcharts": "^3.46.0",
@@ -21,6 +23,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "os-utils": "^0.0.14",
+    "preline": "^3.0.1",
     "ps-list": "^8.1.1",
     "tailwindcss": "^4.0.17"
   }
