@@ -6,7 +6,7 @@
     <title>Monitor de Processos</title>
     <script defer src="src/processMonitor.js" type="module"></script>
     <script defer src="src/processOS.js" type="module"></script>
-    <script defer src="src/permission.js"></script>
+    <script defer src="src/permission.js" type="module"></script>
     <script src="./assets/vendor/preline/dist/preline.js"></script>
     <script defer src="src/modal.js"></script>
     <link href="src/output.css" rel="stylesheet">
@@ -15,30 +15,33 @@
 </head>
 
 <body class="bg-gray-900 text-gray-800">
-    <div><div class="space-y-5" id="divModal">
-
-      </div></div>
+    
     <div class="flex flex-row-reverse min-h-screen min-w-screen">
-        <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden w-full"></div>
+
+        
+        <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden w-full">
+
+        </div>
+        
         <div class="flex flex-col gap-5 p-10 w-full" style="padding: calc(0.25rem * 20) 0 calc(0.25rem * 20) calc(0.25rem * 20) ;">
-            <div class="flex content-between gap-5">
+            <div class="flex gap-5" style="justify-content: space-between;">
                 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex content-between">
+                    <div class="flex" style="justify-content: space-between;"> 
                         <div>
                             <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">RAM</h5>
                             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso de RAM (GB)</p>
                         </div>
-                        <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoRam">12%</div>
+                        <div class="flex items-start px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-end infoRam">GB</div>
                     </div>
                     <div id="area-chart"></div>
                 </div>
                 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex content-between">
+                    <div class="flex" style="justify-content: space-between;">
                         <div>
                             <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">CPU</h5>
                             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso da CPU</p>
                         </div>
-                        <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoCpu">12%</div>
+                        <div class="flex items-start px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoCpu">%</div>
                     </div>
                     <div id="area-chart2"></div>
                 </div>
@@ -48,7 +51,7 @@
                   <form action="#" class="text-white max-w-sm mx-auto min-h-full flex flex-col content-center">
                     <label for="select-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
                     <select id="select-user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="margin-bottom: 10px;">
-                      <option value="">---</option>
+                      <option value="null">---</option>
                       <option value="x">--x</option>
                       <option value="w">-w-</option>
                       <option value="Wx">-wx</option>
@@ -60,7 +63,7 @@
     
                     <label for="select-group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo</label>
                     <select id="select-group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  style="margin-bottom: 10px;">
-                      <option value="">---</option>
+                      <option value="null">---</option>
                       <option value="x">--x</option>
                       <option value="w">-w-</option>
                       <option value="wx">-wx</option>
@@ -71,12 +74,12 @@
                     </select>
 
                     <label for="dir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Diretório</label>
-                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="margin-bottom: 20px;" id="dir">
+                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="margin-bottom: 20px;" id="dir" autocomplete="off">
 
                     <button class="text-white bg-blue-700 hover:bg-blue-800 font-bold rounded-lg text-sm py-2.5 me-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer" id="btn-atribuir">Atribuir</button>
                   </form>
                 </div>
-                <div class="relative overflow-x-auto shadow-md rounded-lg w-full h-full bg-amber-300" style="padding-right: calc(0.25rem *20);">
+                <div class="relative overflow-x-auto shadow-md rounded-lg w-full h-full bg-amber-300">
                 <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">PERMISSÕES</h5>
                   <table class="w-full text-sm text-left text-white dark:text-gray-800">
                     <thead>

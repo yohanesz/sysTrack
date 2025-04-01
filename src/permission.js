@@ -20,15 +20,16 @@ botaoAtribuir.addEventListener('click', async (evento) => {
         });
 
         const data = await response.json();
-        // document.getElementById('result').textContent = data.message || data.error;
         modal(data.message, 1);
         
         if (!response.ok) {
             modal(data.error, 2);
+            console.log(error.message);
         }
 
     } catch (error) {
         modal(`Erro ao enviar requisição: ${error.message}`, 2);
+        console.log(error.message);
     }
 
 });

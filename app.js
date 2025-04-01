@@ -27,8 +27,9 @@ async function getProcesses() {
             cpu: proc.cpu,
             memory: proc.memory,
         }));
+
     } catch (error) {
-        console.error("Erro ao obter processos:", error);
+        console.log(error.message);
         return [];
     }
 }
@@ -77,16 +78,19 @@ app.post('/api/kill/:pid', (req, res) => {
             return res.status(500).json({ error: stderr });
         }
 
-        console.log(`Processo ${pid} encerrado com sucesso.`);
         res.json({ message: `Processo ${pid} encerrado com sucesso.` });
     });
 });
 
-app.post('/api/chmod/:user/:group/:dir', (req, res) => {
-    const user = req.params.user;
-    const group = req.params.group;
-    const dir = req.params.dir;
+app.post('/api/chmod/:user/:group/*', (req, res) => {
+    let { user, group} = req.params;
+    let dir = req.params[0];
+
+    user = user === 'null' ? '' : user;
+    group = group === 'null' ? '' : group;
+
     const comando = `chmod u=${user},g=${group} ${process.env.HOME}/${dir}`;
+    
 
     exec(comando, (error, stdout, stderr) => {
         if (error) {
