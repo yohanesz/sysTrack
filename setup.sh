@@ -24,4 +24,4 @@ fi
 
 chmod +x setup.sh
 
-echo "✅ Configuração concluída! Para iniciar o projeto, execute: npm start"
+echo "✅ Configuração concluída! Para iniciar o projeto, execute: npm start e npm run dev"
