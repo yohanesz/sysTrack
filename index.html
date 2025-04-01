@@ -12,10 +12,10 @@
 <body class="bg-gray-900 text-gray-800">
     <div class="flex flex-row-reverse min-h-screen min-w-screen">
         <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden w-full"></div>
-        <div class="flex flex-col gap-5 p-10 w-full">
-            <div class="flex justify-between gap-5 p-20">
+        <div class="flex flex-col gap-5 p-10 w-full" style="padding: calc(0.25rem * 20) 0 calc(0.25rem * 20) calc(0.25rem * 20) ;">
+            <div class="flex content-between gap-5">
                 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex justify-between">
+                    <div class="flex content-between">
                         <div>
                             <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">RAM</h5>
                             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso de RAM (GB)</p>
@@ -25,7 +25,7 @@
                     <div id="area-chart"></div>
                 </div>
                 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex justify-between">
+                    <div class="flex content-between">
                         <div>
                             <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">CPU</h5>
                             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso da CPU</p>
@@ -35,51 +35,110 @@
                     <div id="area-chart2"></div>
                 </div>
             </div>
-            <div class="flex justify-between gap-5 p-20">
-                <div class=" bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6 w-full h-full">
-                  <form action="#" class="text-white max-w-sm mx-auto">
+            <div class="flex content-between gap-5 h-100" style="padding-top: calc(0.25rem * 20);">
+                <div class=" bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6 min-h-full flex">
+                  <form action="#" class="text-white max-w-sm mx-auto min-h-full flex flex-col content-center">
                     <label for="select-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
-                    <select id="select-user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                      <option>Selecione um usuário</option>
+                    <select id="select-user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <option value="0">---</option>
+                      <option value="1">--x</option>
+                      <option value="2">-w-</option>
+                      <option value="3">-wx</option>
+                      <option value="4">r--</option>
+                      <option value="5">r-x</option>
+                      <option value="6">rw-</option>
+                      <option value="7">rwx</option>
                     </select>
-                    <label for="pasta" class="block mt-4 text-sm font-medium text-gray-900 dark:text-white">Escolha um diretório</label>
-                    <input type="file" multiple webkitdirectory id="pasta" class="block w-full p-2.5 mt-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    
+                    <label for="select-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo</label>
+                    <select id="select-user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <option value="0">---</option>
+                      <option value="1">--x</option>
+                      <option value="2">-w-</option>
+                      <option value="3">-wx</option>
+                      <option value="4">r--</option>
+                      <option value="5">r-x</option>
+                      <option value="6">rw-</option>
+                      <option value="7">rwx</option>
+                    </select>
+
+                    <label for="dir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Diretório</label>
+                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 font-bold rounded-lg text-sm py-2.5 me-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer" style="margin-top: 20px;">Atribuir</button>
                   </form>
                 </div>
-                <div class="relative overflow-x-auto shadow-md rounded-lg w-full">
-                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 h-full">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                      <tr>
-                        <th scope="col" class="px-6 py-3 text-center">Permissão</th>
-                              <th scope="col" class="px-6 py-3 text-center">Octal</th>
-                              <th scope="col" class="px-6 py-3 text-center">R</th>
-                              <th scope="col" class="px-6 py-3 text-center">W</th>
-                              <th scope="col" class="px-6 py-3 text-center">X</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">---</th>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                            </tr>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">--x</th>
-                              <td class="px-6 py-4 text-center">1</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">1</td>
-                            </tr>
-                            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">-w-</th>
-                              <td class="px-6 py-4 text-center">2</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                              <td class="px-6 py-4 text-center">1</td>
-                              <td class="px-6 py-4 text-center">0</td>
-                            </tr>
-                          </tbody>
+                <div class="relative overflow-x-auto shadow-md rounded-lg w-full h-full">
+                  <table class="w-full text-sm text-left text-white dark:text-gray-800">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-center">Per</th>
+                            <th scope="col" class="px-6 py-3 text-center">Octal</th>
+                            <th scope="col" class="px-6 py-3 text-center">R</th>
+                            <th scope="col" class="px-6 py-3 text-center">W</th>
+                            <th scope="col" class="px-6 py-3 text-center">X</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">---</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                        </tr>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">--x</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">-w-</td>
+                            <td class="px-6 py-4 text-center">2</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">-wx</td>
+                            <td class="px-6 py-4 text-center">3</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">r--</td>
+                            <td class="px-6 py-4 text-center">4</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">r-x<dth>
+                            <td class="px-6 py-4 text-center">5</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">rw-</td>
+                            <td class="px-6 py-4 text-center">6</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">0</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4 text-center">rwx</td>
+                            <td class="px-6 py-4 text-center">7</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                            <td class="px-6 py-4 text-center">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
                         </table>
                   </div>
             </div>
