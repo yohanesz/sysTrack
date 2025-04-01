@@ -5,77 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitor de Processos</title>
     <script defer src="src/processMonitor.js" type="module"></script>
+    <script defer src="src/processOS.js" type="module"></script>
+    <script defer src="src/form.js" type="module"></script>
     <link href="src/output.css" rel="stylesheet">
-    <!-- <script defer src="/charts.js" type="module"></script> -->
-     <script defer src="src/processOS.js" type="module"></script>
-
 </head>
 <body class="bg-gray-900 text-gray-800">
-
     <div class="flex flex-row-reverse min-h-screen min-w-screen">
-        
-       
-        <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden">
-                
-        </div>
-     
-      <div>
-
-            
-  <div class="flex max-h-full justify-between gap-5 max-w-screen" style="padding: calc(0.25rem * 20) 0 calc(0.25rem * 20) 0">
-                
-<div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-    <div class="flex justify-between">
-      <div>
-        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">RAM</h5>
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso de RAM (GB)</p>
-      </div>
-      <div
-        class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoRam">
-        12%
-        <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-        </svg>
-      </div>
-    </div>
-    <div id="area-chart"></div>
-  </div>
-
-  <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-    <div class="flex justify-between">
-      <div>
-        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">CPU</h5>
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso da CPU</p>
-      </div>
-      <div
-        class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoCpu">
-        12%
-        <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-        </svg>
-      </div>
-    </div>
-    <div id="area-chart2"></div>
-  </div>
- 
-
-
-  </div>
-            <div class="max-w-screen w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
-                <form action="#" class="text-white max-w-sm mx-auto" >
-                  <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your country</label>
-                  <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>France</option>
-                    <option>Germany</option> -->
-                  </select>
-                </form>
+        <div id="processList" class="flex flex-col gap-5 overflow-scroll p-20 rounded-lg shadow-sm max-h-screen overflow-x-hidden w-full"></div>
+        <div class="flex flex-col gap-5 p-10 w-full">
+            <div class="flex justify-between gap-5 p-20">
+                <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
+                    <div class="flex justify-between">
+                        <div>
+                            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">RAM</h5>
+                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso de RAM (GB)</p>
+                        </div>
+                        <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoRam">12%</div>
+                    </div>
+                    <div id="area-chart"></div>
+                </div>
+                <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
+                    <div class="flex justify-between">
+                        <div>
+                            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">CPU</h5>
+                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Uso da CPU</p>
+                        </div>
+                        <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center infoCpu">12%</div>
+                    </div>
+                    <div id="area-chart2"></div>
+                </div>
             </div>
-
+            <div class="flex justify-between gap-5 p-20">
+                <div class=" bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6 w-full h-full">
+                  <form action="#" class="text-white max-w-sm mx-auto">
+                    <label for="select-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
+                    <select id="select-user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <option>Selecione um usuário</option>
+                    </select>
+                    <label for="pasta" class="block mt-4 text-sm font-medium text-gray-900 dark:text-white">Escolha um diretório</label>
+                    <input type="file" multiple webkitdirectory id="pasta" class="block w-full p-2.5 mt-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  </form>
+                </div>
+                <div class="relative overflow-x-auto shadow-md rounded-lg w-full">
+                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 h-full">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                        <th scope="col" class="px-6 py-3 text-center">Permissão</th>
+                              <th scope="col" class="px-6 py-3 text-center">Octal</th>
+                              <th scope="col" class="px-6 py-3 text-center">R</th>
+                              <th scope="col" class="px-6 py-3 text-center">W</th>
+                              <th scope="col" class="px-6 py-3 text-center">X</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">---</th>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                            </tr>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">--x</th>
+                              <td class="px-6 py-4 text-center">1</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">1</td>
+                            </tr>
+                            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                              <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">-w-</th>
+                              <td class="px-6 py-4 text-center">2</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                              <td class="px-6 py-4 text-center">1</td>
+                              <td class="px-6 py-4 text-center">0</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+            </div>
         </div>
     </div>
-
-</body>
+  </body>
 </html>

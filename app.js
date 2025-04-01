@@ -5,6 +5,7 @@ import os from 'os';
 import oss from 'os-utils';
 import { exec } from 'child_process';
 import dotenv from "dotenv";
+import { group } from 'console';
 
 dotenv.config();
 
@@ -30,8 +31,6 @@ async function getProcesses() {
         return [];
     }
 }
-
-
 
 app.get('/api', async (req, res) => {
     try {
@@ -81,6 +80,33 @@ app.post('/api/kill/:pid', (req, res) => {
         res.json({ message: `Processo ${pid} encerrado com sucesso.` });
     });
 });
+
+app.get("/api/getUsers", (req, res) => {
+    exec("cut -d: -f1 /etc/passwd", (error, output) => {
+
+        if (error) {
+            console.error(`Erro: ${error.message}`);
+            return res.json({ error: error.message });
+        }
+   
+        const users = output.split("\n");
+        res.json({ users });
+    });
+});
+
+app.get("/api/getGroups", (req, res) => {
+
+    exec(`cut -d: -f1 /etc/group`, (error, output) => {
+        if(error) {
+            console.error(`Erro: ${error.message}`);
+            return res.json({error:error.message});
+        }
+
+        const groups = output.split("\n");
+        res.json({ groups });
+    })
+})
+
 
 
 app.listen(process.env.PORTA, () => {
